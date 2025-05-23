@@ -29,17 +29,29 @@ const Login = () => {
         setError(error || 'Credenciais inválidas. Tente novamente.');
       }
     } catch (err) {
-      setError(err.message || 'Erro ao fazer login. Tente novamente.');
+      setError(err.message || 'Erro ao entrar, verifique se suas informções foram adicionadas corretamente.');
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <Box minH="100vh" display="flex" flexDirection="column" bg={bgColor}>
+    <Box
+  minH="100vh"
+  display="flex"
+  flexDirection="column"
+  bg="linear-gradient(360deg,rgba(255, 255, 255, 1) 0%, rgba(180, 211, 222, 1) 48%, rgba(0, 88, 219, 1) 100%);"
+>
       <Header />
       
-      <Container maxW="container.md" py={10} flex="1">
+      <Container
+  maxW="container.md"
+  py={10}
+  flex="1"
+  display="flex"
+  alignItems="center"
+  justifyContent="center"
+>
         <VStack spacing={6} align="stretch">
           <Heading as="h1" size="xl" textAlign="center" mb={4}>
             Login
@@ -84,7 +96,6 @@ const Login = () => {
                 
                 <Button 
                   type="submit" 
-                  colorScheme="blue" 
                   width="full" 
                   mt={4}
                   isLoading={isLoading}

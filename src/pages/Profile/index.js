@@ -31,7 +31,7 @@ const Profile = () => {
   const navigate = useNavigate();
   const toast = useToast();
   const [error, setError] = useState('');
-  const bgColor = useColorModeValue('gray.50', 'gray.900');
+  const bgColor = useColorModeValue('linear-gradient(360deg,rgba(255, 255, 255, 1) 0%, rgba(180, 211, 222, 1) 48%, rgba(0, 88, 219, 1) 100%);');
   const cardBg = useColorModeValue('white', 'gray.700');
   const { isOpen, onOpen, onClose } = useDisclosure();
   const cancelRef = React.useRef();
@@ -104,23 +104,24 @@ const Profile = () => {
     );
   }
 
-  return (
-    <Box minH="100vh" display="flex" flexDirection="column" bg={bgColor}>
-      <Header />
-      
-      <Container maxW="container.md" py={10} flex="1">
+return (
+  <Box minH="100vh" bg={bgColor} display="flex" flexDirection="column">
+    <Header />
+
+    <Box flex="1" display="flex" alignItems="center" justifyContent="center">
+      <Container maxW="md" p={6} boxShadow="lg" bg={cardBg} borderRadius="lg">
         <VStack spacing={6} align="stretch">
           <Heading as="h1" size="xl" textAlign="center" mb={4}>
             Meu Perfil
           </Heading>
-          
+
           {error && (
             <Alert status="error" borderRadius="md">
               <AlertIcon />
               {error}
             </Alert>
           )}
-          
+
           {profile && (
             <>
               <UserForm 
@@ -133,17 +134,17 @@ const Profile = () => {
                 onSubmit={handleSubmit}
                 isRegister={false}
               />
-              
-              <Box mt={8} p={6} borderWidth="1px" borderRadius="lg" bg={cardBg}>
+
+              <Box mt={8} p={6} borderWidth="1px" borderRadius="lg" color="gray">
                 <VStack spacing={4} align="stretch">
-                  <Heading as="h3" size="md" color="red.500">
-                    Zona de Perigo
+                  <Heading as="h2" size="md" color="red.500">
+                    Atenção: Exclusão de Conta
                   </Heading>
                   <Text>
                     Ao excluir sua conta, todos os seus dados serão permanentemente removidos e não poderão ser recuperados.
                   </Text>
                   <Button colorScheme="red" onClick={onOpen}>
-                    Excluir Minha Conta
+                    Excluir Minha Conta !
                   </Button>
                 </VStack>
               </Box>
@@ -151,38 +152,40 @@ const Profile = () => {
           )}
         </VStack>
       </Container>
-      
-      <Footer />
-      
-      {/* Diálogo de confirmação para exclusão de conta */}
-      <AlertDialog
-        isOpen={isOpen}
-        leastDestructiveRef={cancelRef}
-        onClose={onClose}
-      >
-        <AlertDialogOverlay>
-          <AlertDialogContent>
-            <AlertDialogHeader fontSize="lg" fontWeight="bold">
-              Excluir Conta
-            </AlertDialogHeader>
-
-            <AlertDialogBody>
-              Tem certeza? Esta ação não pode ser desfeita. Todos os seus dados serão permanentemente excluídos.
-            </AlertDialogBody>
-
-            <AlertDialogFooter>
-              <Button ref={cancelRef} onClick={onClose}>
-                Cancelar
-              </Button>
-              <Button colorScheme="red" onClick={handleDeleteAccount} ml={3}>
-                Excluir
-              </Button>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialogOverlay>
-      </AlertDialog>
     </Box>
-  );
+
+    <Footer />
+
+    {/* Diálogo de confirmação para exclusão de conta */}
+    <AlertDialog
+      isOpen={isOpen}
+      leastDestructiveRef={cancelRef}
+      onClose={onClose}
+    >
+      <AlertDialogOverlay>
+        <AlertDialogContent>
+          <AlertDialogHeader fontSize="lg" fontWeight="bold">
+            Excluir Minha Conta
+          </AlertDialogHeader>
+
+          <AlertDialogBody>
+            Tem certeza? Ao continuar com a exclusão, não será possível reverter essa ação. Todos seus dados serão permanentemente removidos.
+          </AlertDialogBody>
+
+          <AlertDialogFooter>
+            <Button ref={cancelRef} onClick={onClose}>
+              Voltar
+            </Button>
+            <Button colorScheme="red" onClick={handleDeleteAccount} ml={3}>
+              Confirmar e Excluir
+            </Button>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialogOverlay>
+    </AlertDialog>
+  </Box>
+);
+
 };
 
 export default Profile;

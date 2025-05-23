@@ -6,7 +6,7 @@ import { useAuth } from '../../contexts/AuthContext';
 const Header = () => {
   const { isAuthenticated, logout } = useAuth();
   const bgColor = useColorModeValue('white', 'gray.800');
-  const borderColor = useColorModeValue('gray.200', 'gray.700');
+  const borderColor = useColorModeValue('blue', 'blue');
 
   const handleLogout = async () => {
     await logout();
@@ -27,17 +27,17 @@ const Header = () => {
       <Container maxW="container.xl">
         <Flex justify="space-between" align="center">
           <Heading as="h1" size="md">
-            <RouterLink to="/">CRUD de Usuários</RouterLink>
+            <RouterLink to="/">AlugueFácil</RouterLink>
           </Heading>
           
           <Flex gap={4}>
             {isAuthenticated ? (
               <>
-                <Button as={RouterLink} to="/profile" variant="ghost" colorScheme="blue">
-                  Meu Perfil
+                <Button as={RouterLink} to="/profile" variant="ghost" colorScheme="black">
+                  Visualizar Perfil
                 </Button>
-                <Button as={RouterLink} to="/users" variant="ghost" colorScheme="blue">
-                  Usuários
+                <Button as={RouterLink} to="/users" variant="ghost" colorScheme="black">
+                  Lista de Usuários
                 </Button>
                 <Button onClick={handleLogout} colorScheme="red" variant="outline">
                   Sair
@@ -45,10 +45,10 @@ const Header = () => {
               </>
             ) : (
               <>
-                <Button as={RouterLink} to="/login" variant="ghost" colorScheme="blue">
-                  Login
+                <Button as={RouterLink} to="/login" variant="ghost" color="black">
+                  Fazer Login
                 </Button>
-                <Button as={RouterLink} to="/register" colorScheme="blue">
+                <Button as={RouterLink} to="/register" color="black" colorScheme="gray" variant="solid">
                   Registrar
                 </Button>
               </>

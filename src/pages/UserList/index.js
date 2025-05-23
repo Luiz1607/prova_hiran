@@ -13,7 +13,7 @@ const UserList = () => {
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
-  const bgColor = useColorModeValue('gray.50', 'gray.900');
+  const bgColor = useColorModeValue('linear-gradient(360deg,rgba(255, 255, 255, 1) 0%, rgba(180, 211, 222, 1) 48%, rgba(0, 88, 219, 1) 100%);', 'gray.800');
 
   useEffect(() => {
     // Redirecionar para login se não estiver autenticado
@@ -57,10 +57,10 @@ const UserList = () => {
   }
 
   return (
-    <Box minH="100vh" display="flex" flexDirection="column" bg={bgColor}>
+    <Box minH="100vh" display="flex" flexDirection="column" bg={bgColor} justifyContent={'flex-start'}>
       <Header />
       
-      <Container maxW="container.xl" py={10} flex="1">
+      <Container maxW="container.xl" py={150} flex="20">
         <VStack spacing={6} align="stretch">
           <Heading as="h1" size="xl" textAlign="center" mb={4}>
             Lista de Usuários
